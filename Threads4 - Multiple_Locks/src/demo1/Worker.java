@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+// Single Intrinsic Lock - Separate methods, separate threads
 public class Worker {
 
 	private final Random random = new Random();
