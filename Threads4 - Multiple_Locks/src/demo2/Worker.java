@@ -11,22 +11,29 @@ public class Worker {
 	private final List<Integer> list1 = new ArrayList<Integer>();
 	private final List<Integer> list2 = new ArrayList<Integer>();
 
-	public synchronized void stageOne() {
-		try {
-			Thread.sleep(1);
-		} catch (final InterruptedException e) {
+	private final Object lock1 = new Object();
+	private final Object lock2 = new Object();
 
+	public void stageOne() {
+		synchronized (lock1) {
+			try {
+				Thread.sleep(1);
+			} catch (final InterruptedException e) {
+
+			}
+			list1.add(random.nextInt(100));
 		}
-		list1.add(random.nextInt(100));
 	}
 
-	public synchronized void stageTwo() {
-		try {
-			Thread.sleep(1);
-		} catch (final InterruptedException e) {
+	public void stageTwo() {
+		synchronized (lock2) {
+			try {
+				Thread.sleep(1);
+			} catch (final InterruptedException e) {
 
+			}
+			list2.add(random.nextInt(100));
 		}
-		list2.add(random.nextInt(100));
 	}
 
 	public void process() {
